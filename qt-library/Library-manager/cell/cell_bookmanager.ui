@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Cell_BookManager</class>
+ <widget class="QWidget" name="Cell_BookManager">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>856</width>
+    <height>569</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="name" stdset="0">
+   <string>bg</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="3" column="0">
+    <widget class="QTableView" name="tableView">
+     <property name="name" stdset="0">
+      <string>table</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="lb_title">
+     <property name="text">
+      <string>图书管理系统/图书管理</string>
+     </property>
+     <property name="name" stdset="0">
+      <string>title</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0" rowspan="2">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>搜索</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>lb</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="le_search">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="name" stdset="0">
+         <string>le</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btn_add">
+        <property name="text">
+         <string>增加</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="btn_change">
+        <property name="text">
+         <string>修改</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QPushButton" name="btn_del">
+        <property name="text">
+         <string>删除</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QPushButton" name="btn_return">
+        <property name="text">
+         <string>图书归还</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QPushButton" name="btn_borrow">
+        <property name="text">
+         <string>图书借阅</string>
+        </property>
+        <property name="name" stdset="0">
+         <string>btn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>103</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
