@@ -30,7 +30,7 @@ void Cell_BookManager::freshPage(QString strCondition)
     //刷新页面，获取所有图书信息
     auto l = SqlManager::getInstance()->getBooks(strCondition);
     m_model.clear();
-    m_model.setHorizontalHeaderLabels(QStringList{"书籍id","书名","价格","类型1","类型2","类型3","数量"});
+    m_model.setHorizontalHeaderLabels(QStringList{"书籍ISBN码","书名","价格","作者","类型","国家","库存","数量"});
     for(int i=0;i<l.size();i++)
     {
         QList<QStandardItem*> items;

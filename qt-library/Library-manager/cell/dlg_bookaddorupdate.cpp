@@ -32,7 +32,7 @@ void Dlg_BookAddOrUpdate::on_btn_ok_released()
         ldata.push_back(ui->cb_type2->currentText());
         ldata.push_back(ui->cb_type3->currentText());
         ldata.push_back(ui->le_cnt->text());
-        SqlManager::getInstance()->updateBooks(ldata);
+        SqlManager::getInstance()->updateBook(ldata);
     }
     else
     {

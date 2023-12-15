@@ -38,7 +38,6 @@ bool SqlManager::login(QString strUser, QString strPass)
         qDebug()<<q.lastError().text();
     }
     return ret;
-
 }
 
 QVector<QStringList> SqlManager::getUsers(QString strCondition)
@@ -69,19 +68,20 @@ QVector<QStringList> SqlManager::getUsers(QString strCondition)
     return vec;
 }
 
-void SqlManager::addUser(QVector<QStringList> v)
+void SqlManager::addUsers(QVector<QStringList> v)
 {
     m_db.transaction();
     QSqlQuery q(m_db);
     for(auto it:v)
     {
-        QString strSql = QString("insert into user VALUES(NULL,'%1','%2','%3','%4','%5','%6')")
-                .arg(it[0])
-                .arg(it[1])
-                .arg(it[2])
-                .arg(it[3])
-                .arg(it[4])
-                .arg(it[5])
+        QString strSql = QString("insert into user VALUES('%1','%2','%3','%4','%5','%6','%7')")
+                .arg(it[0]) //学号
+                .arg(it[1]) //年级
+                .arg(it[2]) //院系
+                .arg(it[3]) //账户名
+                .arg(it[4]) //密码
+                .arg(it[5]) //昵称
+                .arg(it[6]) //权限
                 ;
         bool ret = q.exec(strSql);
         if(!ret)
@@ -141,13 +141,15 @@ void SqlManager::addBooks(QVector<QStringList> v)
     QSqlQuery q(m_db);
     for(auto it:v)
     {
-        QString strSql = QString("insert into book VALUES(NULL,'%1','%2','%3','%4','%5','%6')")
-                .arg(it[0])
-                .arg(it[1])
-                .arg(it[2])
-                .arg(it[3])
-                .arg(it[4])
-                .arg(it[5])
+        QString strSql = QString("insert into book VALUES('%1','%2','%3','%4','%5','%6','%7','%8')")
+                .arg(it[0]) //ISBN
+                .arg(it[1]) //name
+                .arg(it[2]) //price
+                .arg(it[3]) //writer
+                .arg(it[4]) //type
+                .arg(it[5]) //nation
+                .arg(it[6]) //inventory
+                .arg(it[7]) //total
                 ;
         bool ret = q.exec(strSql);
         if(!ret)
@@ -158,19 +160,20 @@ void SqlManager::addBooks(QVector<QStringList> v)
     m_db.commit();
 }
 
-void SqlManager::updateBooks(QStringList ldata)
+void SqlManager::updateBook(QStringList ldata)
 {
     QSqlQuery q(m_db);
     QString strSql = QString("UPDATE book "
-                             "SET name ='%1',price='%2',type1='%3',type2='%4',type3='%5',cnt=%6 "
-                             "WHERE bookid=%7")
-            .arg(ldata[1])
-            .arg(ldata[2])
-            .arg(ldata[3])
-            .arg(ldata[4])
-            .arg(ldata[5])
-            .arg(ldata[6].toInt())
-            .arg(ldata[0].toInt())
+                             "SET name ='%1',price='%2',writer='%3',type='%4',nation='%5',inventory='%6',total=%7 "
+                             "WHERE ISBN=%8")
+            .arg(ldata[1])          //name
+            .arg(ldata[2])          //price
+            .arg(ldata[3])          //writer
+            .arg(ldata[4])          //type
+            .arg(ldata[5])          //nation
+            .arg(ldata[6].toInt())  //inventory
+            .arg(ldata[7].toInt())  //total
+            .arg(ldata[0])          //ISBN
             ;
 
     bool ret = q.exec(strSql);
@@ -180,11 +183,11 @@ void SqlManager::updateBooks(QStringList ldata)
     }
 }
 
-QString SqlManager::delBook(QString strId)
+QString SqlManager::delBook(QString strISBN)
 {
     QString strRet;
     QSqlQuery q(m_db);
-    QString strSql = QString("delete from book where bookid=%1").arg(strId);
+    QString strSql = QString("delete from book where ISBN=%1").arg(strISBN);
     bool ret = q.exec(strSql);
     if(!ret)
     {
@@ -246,7 +249,7 @@ void SqlManager::addRecord(QStringList l)
 void SqlManager::delRecord(QStringList l)
 {
     QSqlQuery q(m_db);
-    QString strSql = QString("delete from record where userid=%1 and bookid=%2")
+    QString strSql = QString("delete from record where userid=%1 and bookISBN=%2")
             .arg(l[0])
             .arg(l[1])
             ;

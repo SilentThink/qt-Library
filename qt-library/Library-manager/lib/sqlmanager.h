@@ -27,7 +27,7 @@ public:
     //获取所有用户
     QVector<QStringList> getUsers(QString strCondition="");
     //添加用户
-    void addUser(QVector<QStringList> v);
+    void addUsers(QVector<QStringList> v);
     //删除用户
     void delUser(QString strId);
 
@@ -37,9 +37,9 @@ public:
     //增加图书
     void addBooks(QVector<QStringList> v);
     //修改图书
-    void updateBooks(QStringList ldata);
+    void updateBook(QStringList ldata);
     //删除图书
-    QString delBook(QString strId);
+    QString delBook(QString strISBN);
     //图书归还
     QString returnBook(QString strUserId,QString strBookId);
     //图书借阅

@@ -97,7 +97,7 @@ void Cell_UserManager::on_btn_import_released()
             vecData.push_back(l);
         }
 
-        SqlManager::getInstance()->addUser(vecData);
+        SqlManager::getInstance()->addUsers(vecData);
         freshPage();
     }
 
