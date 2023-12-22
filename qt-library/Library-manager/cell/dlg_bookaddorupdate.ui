@@ -6,16 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>353</height>
+    <width>459</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_3">
      <property name="minimumSize">
       <size>
        <width>60</width>
@@ -23,17 +23,30 @@
       </size>
      </property>
      <property name="text">
-      <string>名称</string>
+      <string>作者</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="le_name"/>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>类别</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QLabel" name="label_2">
      <property name="minimumSize">
       <size>
@@ -49,164 +62,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="le_price"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="minimumSize">
-      <size>
-       <width>60</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>数量</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="le_cnt"/>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="minimumSize">
-      <size>
-       <width>60</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>类别1</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QComboBox" name="cb_type1">
-     <item>
-      <property name="text">
-       <string>历史</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>人文</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>爱情</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>悬疑</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>诗歌</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="minimumSize">
-      <size>
-       <width>60</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>类别2</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QComboBox" name="cb_type2">
-     <item>
-      <property name="text">
-       <string>历史</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>人文</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>爱情</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>悬疑</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>诗歌</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="minimumSize">
-      <size>
-       <width>60</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>类别3</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QComboBox" name="cb_type3">
-     <item>
-      <property name="text">
-       <string>历史</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>人文</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>爱情</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>悬疑</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>诗歌</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="6" column="0" colspan="2">
+   <item row="9" column="0" colspan="3">
     <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
@@ -237,6 +93,170 @@
       </item>
      </layout>
     </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLineEdit" name="le_ISBN"/>
+   </item>
+   <item row="6" column="2">
+    <widget class="QComboBox" name="cb_nation">
+     <item>
+      <property name="text">
+       <string>中国</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>美国</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>日本</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>哥伦比亚</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>法国</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>俄国</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>英国</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>捷克</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>ISBN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QLineEdit" name="le_inventory"/>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="le_name"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>名称</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QComboBox" name="cb_type">
+     <item>
+      <property name="text">
+       <string>历史</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>励志</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>人文</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>爱情</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>悬疑</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>诗歌</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLineEdit" name="le_price"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>国家</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QLineEdit" name="le_writer"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>库存</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>数量</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="2">
+    <widget class="QLineEdit" name="le_cnt"/>
    </item>
   </layout>
  </widget>

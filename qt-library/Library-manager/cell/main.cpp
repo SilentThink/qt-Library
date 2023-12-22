@@ -14,8 +14,7 @@ int main(int argc, char *argv[])
     int ret = dlg.exec();
     if(ret == 1)
     {
-        Cell_Main w;
-        w.show();
+        Cell_Main::getInstance()->show();
         return a.exec();
     }
     if(ret == 0)

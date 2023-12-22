@@ -8,9 +8,11 @@ Cell_record::Cell_record(QWidget *parent) :
     ui->setupUi(this);
     ui->tableView->setModel(&m_model);
     //设置不可编辑
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //设置选中单行
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    //自适应宽度
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     freshPage();
 }
 
@@ -24,7 +26,7 @@ void Cell_record::freshPage(QString strCondition)
     //刷新页面，获取所有记录
     auto l = SqlManager::getInstance()->getRecord(strCondition);
     m_model.clear();
-    m_model.setHorizontalHeaderLabels(QStringList{"记录id","用户id","书籍id","起始日期","还书日期"});
+    m_model.setHorizontalHeaderLabels(QStringList{"用户id","书籍ISBN","起始日期","还书截止日期"});
     for(int i=0;i<l.size();i++)
     {
         QList<QStandardItem*> items;
@@ -36,15 +38,10 @@ void Cell_record::freshPage(QString strCondition)
     }
 }
 
-void Cell_record::on_btn_clear_released()
-{
-    SqlManager::getInstance()->clearRecord();
-    freshPage();
-}
 
 void Cell_record::on_le_search_textChanged(const QString &arg1)
 {
     //查找记录
-    QString strCond = QString("where username like '%%1%' or nickname like '%%1%'").arg(arg1);
+    QString strCond = QString("where userid like '%%1%' or bookISBN like '%%1%'").arg(arg1);
     freshPage(strCond);
 }

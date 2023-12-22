@@ -15,16 +15,20 @@ public:
     explicit Dlg_BorrowOrReturn(QWidget *parent = nullptr);
     ~Dlg_BorrowOrReturn();
 
-    void setType(int id);
+    void setType(QString ISBN);
 
 private slots:
     void on_btn_ok_released();
 
     void on_btn_cancel_released();
 
+    void on_le_userid_textChanged(const QString &arg1);
+
+    void on_le_ISBN_textChanged(const QString &arg1);
+
 private:
     Ui::Dlg_BorrowOrReturn *ui;
-    int m_id=-1;
+    QString m_ISBN=nullptr;
 };
 
 #endif // DLG_BORROWORRETURN_H

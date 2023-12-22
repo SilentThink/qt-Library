@@ -2,7 +2,7 @@
 #include "ui_cell_main.h"
 #include "dlg_login.h"
 #include <QPushButton>
-
+Cell_Main* Cell_Main::instance = nullptr;
 Cell_Main::Cell_Main(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Cell_Main)
@@ -24,9 +24,11 @@ void Cell_Main::initPage()
     m_userPage = new Cell_UserManager(this);
     m_bookPage = new Cell_BookManager(this);
     m_recordPage = new Cell_record(this);
+    m_help = new Cell_help(this);
     ui->stackedWidget->addWidget(m_userPage);
     ui->stackedWidget->addWidget(m_bookPage);
     ui->stackedWidget->addWidget(m_recordPage);
+    ui->stackedWidget->addWidget(m_help);
     ui->stackedWidget->setCurrentIndex(0);
 
     auto l = ui->tool->children();
@@ -38,6 +40,13 @@ void Cell_Main::initPage()
         }
     }
     m_userPage->freshPage();
+}
+
+void Cell_Main::freshAll()
+{
+    m_bookPage->Cell_BookManager::freshPage();
+    m_userPage->Cell_UserManager::freshPage();
+    m_recordPage->Cell_record::freshPage();
 }
 
 void Cell_Main::dealMenu()
@@ -59,16 +68,17 @@ void Cell_Main::dealMenu()
             break;
         }
 
-//        if("btn_borrow"==str)
-//        {
-//            ui->stackedWidget->setCurrentIndex(2);
-//            break;
-//        }
 
         if("btn_record"==str)
         {
             m_recordPage->freshPage();
             ui->stackedWidget->setCurrentIndex(2);
+            break;
+        }
+
+        if("btn_help"==str)
+        {
+            ui->stackedWidget->setCurrentIndex(3);
             break;
         }
     }while(false);

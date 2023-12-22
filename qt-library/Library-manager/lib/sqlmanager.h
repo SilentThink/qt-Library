@@ -41,17 +41,15 @@ public:
     //删除图书
     QString delBook(QString strISBN);
     //图书归还
-    QString returnBook(QString strUserId,QString strBookId);
+    QString returnBook(QString strBookISBN);
     //图书借阅
-    QString borrowBook(QString strUserId,QString strBookId);
+    QString borrowBook(QString strBookISBN);
     //获取借阅记录
     QVector<QStringList> getRecord(QString strCondition="");
     //添加借阅记录
     void addRecord(QStringList l);
     //删除借阅记录
     void delRecord(QStringList l);
-    //清空借阅记录
-    QString clearRecord();
 
 private:
     QSqlDatabase m_db;

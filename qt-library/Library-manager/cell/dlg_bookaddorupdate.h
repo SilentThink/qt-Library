@@ -15,7 +15,8 @@ public:
     explicit Dlg_BookAddOrUpdate(QWidget *parent = nullptr);
     ~Dlg_BookAddOrUpdate();
 
-    void setType(int id);
+    void setType(QString ISBN);
+    void initInfo(QString ISBN,QString name,QString price,QString writer,QString type,QString nation,int inventory,int total);
 
 private slots:
     void on_btn_ok_released();
@@ -24,7 +25,7 @@ private slots:
 
 private:
     Ui::Dlg_BookAddOrUpdate *ui;
-    int m_id=-1;
+    QString m_ISBN=nullptr;
 };
 
 #endif // DLG_BOOKADDORUPDATE_H

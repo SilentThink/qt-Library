@@ -4,7 +4,8 @@
 #include "dlg_bookaddorupdate.h"
 #include "dlg_borroworreturn.h"
 #include "dlg_borroworreturn.h"
-
+#include "cell_main.h"
+#include <QTableView>
 #include <QMessageBox>
 
 Cell_BookManager::Cell_BookManager(QWidget *parent) :
@@ -13,10 +14,10 @@ Cell_BookManager::Cell_BookManager(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableView->setModel(&m_model);
-    //设置不可编辑
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //设置选中单行
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    //自适应宽度
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     freshPage();
 }
 
@@ -47,13 +48,13 @@ void Cell_BookManager::on_btn_add_released()
 {
     //增加图书
     Dlg_BookAddOrUpdate dlg(this);
-    dlg.setType(-1);
+    dlg.setType(nullptr);
     dlg.setWindowTitle("增加图书");
     dlg.show();
     int ret = dlg.exec();
     if(ret == 1)
     {
-        freshPage();
+        Cell_Main::getInstance()->freshAll();
     }
 }
 
@@ -61,7 +62,7 @@ void Cell_BookManager::on_btn_change_released()
 {
     //修改图书
     Dlg_BookAddOrUpdate dlg(this);
-    int id= -1;
+    QString ISBN= nullptr;
     QModelIndexList selectedIndexes = ui->tableView->selectionModel()->selectedIndexes();
     if(selectedIndexes.isEmpty())
     {
@@ -70,9 +71,18 @@ void Cell_BookManager::on_btn_change_released()
     else
     {
         QVariant selectValue = m_model.data(selectedIndexes.first(),Qt::DisplayRole);
-        id = selectValue.toInt();
-        dlg.setType(id);
-        dlg.setWindowTitle("增加图书");
+        ISBN = selectValue.toString();
+        dlg.setType(ISBN);
+        dlg.setWindowTitle("修改图书");
+        dlg.initInfo(m_model.data(selectedIndexes.first(),Qt::DisplayRole).toString(),
+                     m_model.data(selectedIndexes.at(1),Qt::DisplayRole).toString(),
+                     m_model.data(selectedIndexes.at(2),Qt::DisplayRole).toString(),
+                     m_model.data(selectedIndexes.at(3),Qt::DisplayRole).toString(),
+                     m_model.data(selectedIndexes.at(4),Qt::DisplayRole).toString(),
+                     m_model.data(selectedIndexes.at(5),Qt::DisplayRole).toString(),
+                     m_model.data(selectedIndexes.at(6),Qt::DisplayRole).toInt(),
+                     m_model.data(selectedIndexes.at(7),Qt::DisplayRole).toInt()
+                     );
         dlg.show();
         int ret = dlg.exec();
         if(ret == 1)
@@ -87,10 +97,10 @@ void Cell_BookManager::on_btn_return_released()
 {
     //归还图书
     Dlg_BorrowOrReturn dlg;
-    dlg.setWindowTitle("增加图书");
+    dlg.setWindowTitle("归还图书");
     dlg.show();
     int ret = dlg.exec();
-    if(ret == 1)
+    if(ret==1)
     {
         freshPage();
     }
@@ -101,8 +111,7 @@ void Cell_BookManager::on_btn_borrow_released()
     //借阅图书
     Dlg_BorrowOrReturn dlg;
     dlg.setWindowTitle("借阅图书");
-    dlg.show();
-    int id= -1;
+    QString ISBN=nullptr;
     QModelIndexList selectedIndexes = ui->tableView->selectionModel()->selectedIndexes();
     if(selectedIndexes.isEmpty())
     {
@@ -111,9 +120,9 @@ void Cell_BookManager::on_btn_borrow_released()
     else
     {
         QVariant selectValue = m_model.data(selectedIndexes.first(),Qt::DisplayRole);
-        id = selectValue.toInt();
-        dlg.setType(id);
-        dlg.setWindowTitle("增加图书");
+        ISBN = selectValue.toString();
+        dlg.setType(ISBN);
+        dlg.setWindowTitle("借阅图书");
         dlg.show();
         int ret = dlg.exec();
         if(ret == 1)
@@ -133,10 +142,18 @@ void Cell_BookManager::on_btn_del_released()
     }
     else
     {
-        QString id = m_model.item(r,0)->text();
-        QString str = SqlManager::getInstance()->delBook(id);
-        QMessageBox::information(nullptr,"信息",str.isEmpty()?"删除成功":str);
-        freshPage();
+        QString id = m_model.item(r,0)->text();// 获取选中行的图书ID
+
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(nullptr, "确认", "您确定要删除这本图书吗？",
+                                      QMessageBox::Yes | QMessageBox::No);
+
+        if (reply == QMessageBox::Yes)
+        {
+            QString str = SqlManager::getInstance()->delBook(id);
+            QMessageBox::information(nullptr,"信息",str.isEmpty()?"删除成功":str);
+            freshPage();
+        }
     }
 }
 
@@ -144,6 +161,6 @@ void Cell_BookManager::on_btn_del_released()
 void Cell_BookManager::on_le_search_textChanged(const QString &arg1)
 {
     //查找图书
-    QString strCond = QString("where name like '%%1%' or type1 like '%%1%'").arg(arg1);
+    QString strCond = QString("where name like '%%1%' or type like '%%1%' or ISBN like '%%1%' or writer like '%%1%'").arg(arg1);
     freshPage(strCond);
 }

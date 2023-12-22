@@ -25,6 +25,8 @@ private slots:
 
     void on_le_search_textChanged(const QString &arg1);
 
+    void on_btn_addUser_released();
+
 private:
     Ui::Cell_UserManager *ui;
     QStandardItemModel m_model;

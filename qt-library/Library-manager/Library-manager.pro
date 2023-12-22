@@ -15,3 +15,9 @@ RESOURCES += \
 
 RC_FILE = $$PWD/res/app.rc
 
+FORMS +=
+
+HEADERS +=
+
+SOURCES +=
+

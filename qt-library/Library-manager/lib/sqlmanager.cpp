@@ -5,6 +5,8 @@
 #include <QSqlRecord>
 #include <QString>
 #include <QStringList>
+#include <QMessageBox>
+#include <QDateTime>
 SqlManager* SqlManager::instance = nullptr;
 SqlManager::SqlManager()
 {
@@ -87,6 +89,7 @@ void SqlManager::addUsers(QVector<QStringList> v)
         if(!ret)
         {
             qDebug()<<q.lastError().text();
+            QMessageBox::warning(nullptr,"错误","用户已经存在");
         }
     }
     m_db.commit();
@@ -154,7 +157,15 @@ void SqlManager::addBooks(QVector<QStringList> v)
         bool ret = q.exec(strSql);
         if(!ret)
         {
-            qDebug()<<q.lastError().text();
+            //qDebug()<<q.lastError().text();
+            QString strSql = QString("UPDATE book "
+                                     "SET inventory = inventory + '%1' ,total = total + '%1' "
+                                     "WHERE ISBN='%2' ")
+                    .arg(it[7].toInt())
+                    .arg(it[0])
+                    ;
+            q.exec(strSql);
+            QMessageBox::warning(nullptr,"提示","书籍已经存在，已增加其数量和库存");
         }
     }
     m_db.commit();
@@ -197,6 +208,34 @@ QString SqlManager::delBook(QString strISBN)
     return strRet;
 }
 
+QString SqlManager::returnBook(QString strBookISBN)
+{
+    QString strRet;
+    QSqlQuery q(m_db);
+    QString strSql = QString("update book set inventory = inventory + 1 where ISBN=%1").arg(strBookISBN);
+    bool ret = q.exec(strSql);
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+        strRet = "还书错误,请检查";
+    }
+    return strRet;
+}
+
+QString SqlManager::borrowBook(QString strBookISBN)
+{
+    QString strRet;
+    QSqlQuery q(m_db);
+    QString strSql = QString("update book set inventory = inventory - 1 where ISBN=%1").arg(strBookISBN);
+    bool ret = q.exec(strSql);
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+        strRet = "借书错误,请检查";
+    }
+    return strRet;
+}
+
 QVector<QStringList> SqlManager::getRecord(QString strCondition)
 {
     QSqlQuery q(m_db);
@@ -233,7 +272,7 @@ void SqlManager::addRecord(QStringList l)
     }
     QSqlQuery q(m_db);
 
-    QString strSql = QString("insert into record VALUES(NULL,'%1','%2','%3','%4')")
+    QString strSql = QString("insert into record VALUES('%1','%2','%3','%4')")
             .arg(l[0])
             .arg(l[1])
             .arg(l[2])
@@ -249,7 +288,9 @@ void SqlManager::addRecord(QStringList l)
 void SqlManager::delRecord(QStringList l)
 {
     QSqlQuery q(m_db);
-    QString strSql = QString("delete from record where userid=%1 and bookISBN=%2")
+    QDateTime currentTime= QDateTime::currentDateTime();//获取系统当前的时间
+    //QString str = dateTime .toString("yyyy-MM-dd");//格式化时间
+    QString strSql = QString("select * from record where userid=%1 and bookISBN=%2")
             .arg(l[0])
             .arg(l[1])
             ;
@@ -258,9 +299,25 @@ void SqlManager::delRecord(QStringList l)
     {
         qDebug()<<q.lastError().text();
     }
+    else
+    {
+        q.next();
+        QString endDate = q.value(3).toString();
+        QDateTime endtime = QDateTime::fromString(endDate, "yyyy-MM-dd");
+        if(currentTime>endtime)
+        {
+            QMessageBox::warning(nullptr,"警告","逾期还书！");
+        }
+    }
+    strSql = QString("delete from record where userid=%1 and bookISBN=%2")
+            .arg(l[0])
+            .arg(l[1])
+            ;
+
+    ret = q.exec(strSql);
+    if(!ret)
+    {
+        qDebug()<<q.lastError().text();
+    }
 }
 
-QString SqlManager::clearRecord()
-{
-
-}
